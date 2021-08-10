@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react'
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import Backdrop from './components/Backdrop';
+import Navbar from './components/Navbar'
+import Sidebar from './components/SideBar'
 
 function App() {
+  const[toggle,setToggle] = useState(false);
+  
+  const toggleHandler = () => setToggle(!toggle);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+       <Backdrop show={toggle} click={toggleHandler}/>
+      <Navbar show={toggle} click={toggleHandler}/>  
+      <Sidebar show={toggle}/>   
+      <Switch>
+        <Route exact path="/" />
+      </Switch>
+    </Router>
   );
 }
 
